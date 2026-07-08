@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-site",
+      "runtimeExecutable": "/usr/bin/ruby",
+      "runtimeArgs": ["-run", "-e", "httpd", "/Users/ddurgin/Documents/Q Fab Works website", "-p", "8090"],
+      "port": 8090
+    }
+  ]
+}

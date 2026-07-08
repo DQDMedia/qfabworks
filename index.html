@@ -6,214 +6,279 @@
 <meta name="color-scheme" content="dark">
 <title>Q Fab Works — Custom Metal Art, Laser Engraving &amp; 3D Printing | Myrtle Beach, SC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500..700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: dark;
-    --steel: #17191b;        /* page background: gunmetal */
-    --steel-2: #1f2225;      /* cards: one step lighter */
-    --ink: #ece9e2;          /* primary text: warm off-white */
-    --ink-soft: #9a9d9f;     /* secondary text */
-    --rule: #2c2f32;         /* hairlines */
-    --torch: #f2a11a;        /* plasma-torch amber */
-    --torch-hot: #ff5a2e;    /* hot-cut orange, secondary accent */
+    --onyx: #0c0d0e;         /* page background: near-black */
+    --onyx-2: #17181a;       /* panels: one step lighter */
+    --chalk: #f3f4ef;        /* primary text: cool white */
+    --chalk-soft: #888d92;   /* secondary text: cool gray */
+    --line: #232527;         /* hairlines */
+    --hazard: #f7d417;       /* safety yellow */
+    --warn: #e8382c;         /* warning red, secondary accent */
+    --chamfer: 18px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
   body {
-    background: var(--steel);
-    color: var(--ink);
-    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    background: var(--onyx);
+    color: var(--chalk);
+    font-family: "Work Sans", "Helvetica Neue", Arial, sans-serif;
     line-height: 1.6;
   }
-  .display { font-family: "Oswald", "Arial Narrow", sans-serif; }
-  .mono { font-family: "IBM Plex Mono", Menlo, monospace; }
+  .display { font-family: "Bebas Neue", "Arial Narrow", sans-serif; }
+  .mono { font-family: "Space Mono", Menlo, monospace; }
+  a { color: inherit; }
+  button { font: inherit; color: inherit; }
 
-  /* ---------- Header ---------- */
-  header {
-    position: sticky; top: 0; z-index: 50;
-    background: var(--steel);
-    border-bottom: 1px solid var(--rule);
-    padding: 10px 16px;
-    display: flex; flex-direction: column; gap: 10px;
+  .hazard-bar {
+    height: 6px;
+    background: repeating-linear-gradient(135deg, var(--hazard) 0 10px, #0a0a0a 10px 20px);
   }
-  .masthead { display: flex; align-items: center; gap: 10px; }
-  .masthead img { height: 40px; width: auto; display: block; }
-  .masthead .word { display: flex; flex-direction: column; gap: 1px; }
-  .masthead .name {
-    font-family: "Oswald", "Arial Narrow", sans-serif; font-weight: 700;
-    font-size: 19px; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.1;
+
+  .chamfer {
+    clip-path: polygon(
+      var(--chamfer) 0, 100% 0, 100% calc(100% - var(--chamfer)),
+      calc(100% - var(--chamfer)) 100%, 0 100%, 0 var(--chamfer)
+    );
   }
-  .masthead .beat {
-    font-family: "IBM Plex Mono", monospace; font-size: 9.5px; letter-spacing: 0.13em;
-    text-transform: uppercase; color: var(--torch); white-space: nowrap;
+  .chamfer-sm {
+    --chamfer: 10px;
   }
-  nav { display: flex; width: 100%; border-top: 1px solid var(--rule); padding-top: 8px; }
-  nav a {
-    flex: 1; text-align: center; white-space: nowrap;
-    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.06em;
-    text-transform: uppercase; text-decoration: none; color: var(--ink-soft);
-    padding: 6px 2px; border-radius: 3px;
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---------- Shopbar ---------- */
+  .shopbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    flex-wrap: wrap; padding: 14px 20px;
   }
-  @media (min-width: 760px) {
-    header { flex-direction: row; align-items: center; justify-content: space-between; padding: 12px 20px; }
-    nav { width: auto; border-top: none; padding-top: 0; gap: 4px; }
-    nav a { flex: none; padding: 6px 10px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand-badge {
+    width: 42px; height: 42px; background: var(--onyx-2); display: flex; align-items: center; justify-content: center;
+    flex: none;
   }
-  nav a:hover, nav a:focus-visible { color: var(--ink); background: #24272a; }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--torch); outline-offset: 2px; }
+  .brand-badge img { height: 26px; width: auto; display: block; }
+  .brand-name {
+    font-family: "Bebas Neue", sans-serif; font-size: 22px; letter-spacing: 0.03em;
+    text-transform: uppercase; line-height: 1;
+  }
+  .shopnav { display: flex; flex-wrap: wrap; gap: 2px; }
+  .shopnav a {
+    font-family: "Work Sans", sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 0.05em;
+    text-transform: uppercase; text-decoration: none; color: var(--chalk-soft);
+    padding: 9px 14px; background: var(--onyx-2);
+  }
+  .shopnav a:hover, .shopnav a:focus-visible { color: #0a0a00; background: var(--hazard); }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--hazard); outline-offset: 2px; }
 
   /* ---------- Hero ---------- */
-  .hero { border-bottom: 1px solid var(--rule); position: relative; overflow: hidden; }
-  .hero-img {
-    min-height: min(60vh, 520px);
+  .hero { padding: 8px 20px 0; }
+  .hero-plate {
     background:
-      radial-gradient(circle at 85% 20%, rgba(242,161,26,0.16), transparent 45%),
-      repeating-linear-gradient(135deg, #1c1f22 0px, #1c1f22 2px, #202326 2px, #202326 4px),
-      linear-gradient(160deg, #101214, #23262a);
-    display: flex; align-items: flex-end;
+      radial-gradient(circle at 88% 12%, rgba(247,212,23,0.10), transparent 45%),
+      repeating-linear-gradient(135deg, #131415 0px, #131415 2px, #17181a 2px, #17181a 4px),
+      linear-gradient(160deg, #0e0f10, #1b1d1f);
+    padding: clamp(30px, 6vw, 60px) clamp(20px, 6vw, 56px);
+    max-width: 1120px; margin: 0 auto;
   }
-  .hero-overlay {
-    width: 100%; padding: 40px 20px 28px;
-    background: linear-gradient(transparent, rgba(8,9,10,0.75));
+  .job-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--hazard); margin-bottom: 18px;
+    border: 1px solid rgba(247,212,23,0.4); padding: 5px 10px 5px 8px;
   }
-  .hero-tag {
-    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.18em;
-    text-transform: uppercase; color: var(--torch); margin-bottom: 10px;
+  .job-tag::before { content: ""; width: 7px; height: 7px; background: var(--warn); flex: none; }
+  .hero-plate h1 {
+    font-family: "Bebas Neue", sans-serif; font-weight: 400;
+    font-size: clamp(40px, 7.5vw, 84px); line-height: 0.96; text-transform: uppercase;
+    max-width: 16ch; color: var(--chalk);
   }
-  .hero-overlay h1 {
-    font-family: "Oswald", "Arial Narrow", sans-serif; font-weight: 700;
-    font-size: clamp(30px, 6vw, 54px); line-height: 1.08; text-transform: uppercase;
-    letter-spacing: 0.01em; max-width: 18ch; color: var(--ink);
+  .hero-plate .hero-sub {
+    font-size: 15.5px; line-height: 1.65; color: #c9cbc7; margin-top: 18px; max-width: 54ch;
   }
-  .hero-sub {
-    font-size: 15px; line-height: 1.6; color: #d3d0c8; margin-top: 12px; max-width: 58ch;
+  .hero-cta {
+    display: inline-block; margin-top: 24px; text-decoration: none;
+    font-family: "Work Sans", sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: #0a0a00; background: var(--hazard);
+    padding: 14px 24px;
   }
-  .hero-strip {
-    display: flex; flex-wrap: wrap; gap: 6px 22px; padding: 12px 20px;
-    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-soft);
+  .hero-cta:hover { background: var(--chalk); }
+
+  .ticker {
+    max-width: 1120px; margin: 0 auto; padding: 0 20px;
+    display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0;
+    border-bottom: 1px solid var(--line);
   }
-  .hero-strip b { color: var(--torch-hot); font-weight: 500; }
+  .ticker::-webkit-scrollbar { display: none; }
+  .ticker span {
+    font-family: "Space Mono", monospace; font-size: 11.5px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--chalk-soft); white-space: nowrap;
+    padding: 14px 18px 14px 0; margin-right: 18px; border-right: 1px solid var(--line);
+  }
+  .ticker span:last-child { border-right: none; }
+  .ticker span b { color: var(--hazard); font-weight: 400; }
 
   /* ---------- Sections ---------- */
-  section { padding: 48px 20px; max-width: 1080px; margin: 0 auto; }
-  .kicker {
-    font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--torch); margin-bottom: 6px;
+  section { padding: 56px 20px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 28px; flex-wrap: wrap; }
+  .sec-head .stamp {
+    font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.1em;
+    color: #0a0a00; background: var(--hazard); padding: 4px 8px; text-transform: uppercase;
   }
-  h2 {
-    font-family: "Oswald", "Arial Narrow", sans-serif; font-weight: 700;
-    font-size: clamp(24px, 4vw, 34px); text-transform: uppercase; letter-spacing: 0.01em;
-    margin-bottom: 8px;
-  }
-  .section-note { color: var(--ink-soft); max-width: 62ch; margin-bottom: 26px; font-size: 16px; }
-
-  /* ---------- Services ---------- */
-  .services { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-  .service {
-    background: var(--steel-2); border: 1px solid var(--rule); border-radius: 4px;
-    padding: 22px 20px;
-  }
-  .service .icon {
-    font-family: "Oswald", sans-serif; font-weight: 700; font-size: 13px;
-    letter-spacing: 0.14em; text-transform: uppercase; color: var(--torch-hot); margin-bottom: 10px;
-  }
-  .service h3 {
-    font-family: "Oswald", "Arial Narrow", sans-serif; font-weight: 700;
-    font-size: 19px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.01em;
-  }
-  .service p { font-size: 14.5px; color: var(--ink-soft); }
-
-  /* ---------- Portfolio ---------- */
-  .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
-  .filters button {
-    font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: 0.06em;
-    text-transform: uppercase; padding: 8px 14px; border-radius: 999px; cursor: pointer;
-    border: 1px solid var(--rule); background: var(--steel-2); color: var(--ink-soft);
-  }
-  .filters button.active { background: var(--torch); border-color: var(--torch); color: #1a1400; }
-  .grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
-  .shot {
-    border: 1px solid var(--rule); border-radius: 4px; overflow: hidden;
-    background: var(--steel-2); cursor: pointer; text-align: left; padding: 0;
-  }
-  .shot-img { height: 180px; width: 100%; }
-  .shot figcaption { padding: 10px 12px 12px; }
-  .shot .title { font-family: "Oswald", "Arial Narrow", sans-serif; font-weight: 600; font-size: 15.5px; }
-  .shot .meta {
-    font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; color: var(--ink-soft); margin-top: 3px;
+  .sec-head h2 {
+    font-family: "Bebas Neue", sans-serif; font-weight: 400;
+    font-size: clamp(26px, 4.5vw, 38px); text-transform: uppercase; line-height: 1;
   }
 
-  /* ---------- Lightbox ---------- */
-  .lightbox {
-    position: fixed; inset: 0; z-index: 100; display: none;
-    background: rgba(5,5,4,0.94); align-items: center; justify-content: center; padding: 20px;
+  /* ---------- Process (services) ---------- */
+  .process { max-width: 1120px; margin: 0 auto; }
+  .process-strip { display: grid; gap: 0; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); position: relative; }
+  .process-step {
+    background: var(--onyx-2); padding: 26px 22px; position: relative;
+    border-top: 3px solid var(--hazard);
   }
-  .lightbox.open { display: flex; }
-  .lb-card { max-width: 720px; width: 100%; }
-  .lb-img { height: min(58vh, 460px); border-radius: 4px; }
-  .lb-cap {
-    font-family: "IBM Plex Mono", monospace; font-size: 12px; line-height: 1.6;
-    color: #e6e1d5; margin-top: 12px;
+  .process-step + .process-step { border-left: 1px solid var(--line); }
+  .process-step .num {
+    font-family: "Bebas Neue", sans-serif; font-size: 40px; color: var(--line); line-height: 1;
+    -webkit-text-stroke: 1px var(--chalk-soft);
+    color: transparent;
   }
-  .lb-close {
-    position: absolute; top: 16px; right: 16px; background: none; border: 1px solid #555;
-    color: #ddd; border-radius: 999px; width: 38px; height: 38px; font-size: 17px; cursor: pointer;
+  .process-step h3 {
+    font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 22px;
+    text-transform: uppercase; margin: 10px 0 8px;
+  }
+  .process-step .tag {
+    font-family: "Space Mono", monospace; font-size: 10.5px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--warn); display: block; margin-bottom: 4px;
+  }
+  .process-step p { font-size: 14.5px; color: var(--chalk-soft); }
+
+  /* ---------- Gallery (filmstrip) ---------- */
+  .gallery-wrap { max-width: 1120px; margin: 0 auto; }
+  .tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
+  .tabs button {
+    font-family: "Space Mono", monospace; font-size: 11.5px; letter-spacing: 0.04em;
+    text-transform: uppercase; padding: 10px 16px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--onyx-2); color: var(--chalk-soft);
+    clip-path: polygon(8px 0, 100% 0, 100% 100%, 0 100%, 0 8px);
+  }
+  .tabs button.active { background: var(--hazard); color: #0a0a00; border-color: var(--hazard); }
+  .filmstrip {
+    display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px;
+    scroll-snap-type: x proximity;
+  }
+  .tile {
+    flex: 0 0 240px; scroll-snap-align: start; cursor: pointer; padding: 0;
+    background: var(--onyx-2); border: 1px solid var(--line); text-align: left;
+    transition: border-color 0.15s ease;
+  }
+  .tile.selected, .tile:hover { border-color: var(--hazard); }
+  .tile-img { height: 160px; width: 100%; position: relative; }
+  .tile figcaption { padding: 10px 12px 12px; }
+  .tile .title { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 18px; letter-spacing: 0.01em; }
+  .tile .meta {
+    font-family: "Space Mono", monospace; font-size: 9.5px; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--chalk-soft); margin-top: 3px;
+  }
+  .detail-panel {
+    margin-top: 16px; background: var(--onyx-2); border-left: 4px solid var(--hazard);
+    display: none; grid-template-columns: minmax(0, 260px) 1fr; gap: 20px; padding: 20px;
+  }
+  .detail-panel.open { display: grid; }
+  .detail-img { height: 220px; width: 100%; }
+  .detail-body h4 { font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: 24px; text-transform: uppercase; }
+  .detail-body .meta { font-family: "Space Mono", monospace; font-size: 11px; color: var(--warn); text-transform: uppercase; margin: 6px 0 10px; }
+  .detail-body p { color: var(--chalk-soft); font-size: 14.5px; max-width: 60ch; }
+  .detail-close {
+    margin-top: 14px; background: none; border: 1px solid var(--line); color: var(--chalk-soft);
+    font-family: "Space Mono", monospace; font-size: 11px; text-transform: uppercase; padding: 8px 14px; cursor: pointer;
+  }
+  .detail-close:hover { border-color: var(--hazard); color: var(--hazard); }
+  @media (max-width: 560px) { .detail-panel { grid-template-columns: 1fr; } }
+
+  /* ---------- About (dossier) ---------- */
+  .dossier { max-width: 1120px; margin: 0 auto; display: grid; gap: 32px; grid-template-columns: 1fr; }
+  @media (min-width: 780px) { .dossier { grid-template-columns: 1fr 260px; } }
+  .dossier-text p { margin-bottom: 14px; max-width: 66ch; }
+  .badge {
+    background: var(--onyx-2); border: 1px dashed var(--line); padding: 22px 18px 18px;
+    position: relative; transform: rotate(-1.2deg);
+  }
+  .badge::before {
+    content: ""; position: absolute; top: -9px; left: 50%; transform: translateX(-50%);
+    width: 18px; height: 18px; border-radius: 50%; background: var(--onyx);
+    border: 1px dashed var(--line);
+  }
+  .badge-photo {
+    width: 100%; height: 170px; background: url('images/headshot.png');
+    background-size: cover; background-position: center top; margin-bottom: 14px;
+    filter: grayscale(0.25);
+  }
+  .badge-name { font-family: "Bebas Neue", sans-serif; font-size: 22px; text-transform: uppercase; line-height: 1; }
+  .badge-role {
+    font-family: "Space Mono", monospace; font-size: 10px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--hazard); margin-top: 6px; margin-bottom: 14px;
+  }
+  .badge ul { list-style: none; border-top: 1px dashed var(--line); padding-top: 10px; }
+  .badge li {
+    font-family: "Space Mono", monospace; font-size: 10.5px; color: var(--chalk-soft);
+    padding: 4px 0; line-height: 1.4;
   }
 
-  /* ---------- About / Contact ---------- */
-  .about-wrap { display: grid; gap: 28px; grid-template-columns: 1fr; }
-  @media (min-width: 720px) { .about-wrap { grid-template-columns: 200px 1fr; } }
-  .headshot {
-    width: 180px; height: 180px; border-radius: 4px;
-    background: url('images/headshot.png');
-    background-size: cover;
-    background-position: center top;
-    border: 1px solid var(--rule);
+  /* ---------- Contact (ticket) ---------- */
+  .ticket-wrap { padding: 0 20px 64px; }
+  .ticket {
+    max-width: 1120px; margin: 0 auto; background: var(--onyx-2);
+    display: grid; grid-template-columns: 1fr; position: relative;
   }
-  .about-text p { margin-bottom: 14px; max-width: 66ch; }
-  .creds { border-top: 1px solid var(--rule); margin-top: 10px; padding-top: 14px; }
-  .creds .kicker { margin-bottom: 10px; }
-  .creds ul { list-style: none; }
-  .creds li {
-    font-family: "IBM Plex Mono", monospace; font-size: 12.5px; padding: 5px 0;
-    color: var(--ink-soft);
+  @media (min-width: 700px) { .ticket { grid-template-columns: 1fr 280px; } }
+  .ticket-main { padding: 40px clamp(20px, 5vw, 48px); }
+  .ticket-main .stamp {
+    font-family: "Space Mono", monospace; font-size: 11px; letter-spacing: 0.1em;
+    color: #0a0a00; background: var(--hazard); padding: 4px 8px; text-transform: uppercase;
+    display: inline-block; margin-bottom: 16px;
   }
-
-  .contact { background: #0d0e0f; color: var(--ink); max-width: none; }
-  .contact-inner { max-width: 1080px; margin: 0 auto; }
-  .contact .kicker { color: var(--torch); }
-  .contact h2 { color: var(--ink); }
-  .contact p { color: #d9d5cc; max-width: 60ch; }
-  .contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
-  .contact a.cta {
-    display: inline-block; text-decoration: none;
-    font-family: "IBM Plex Mono", monospace; font-size: 14px; letter-spacing: 0.04em;
-    color: var(--ink); border: 1px solid #4a4d50; border-radius: 999px; padding: 12px 22px;
+  .ticket-main h2 {
+    font-family: "Bebas Neue", sans-serif; font-weight: 400; font-size: clamp(28px, 5vw, 42px);
+    text-transform: uppercase; line-height: 1; margin-bottom: 14px;
   }
-  .contact a.cta:hover { border-color: var(--torch); color: var(--torch); }
+  .ticket-main p { color: #c9cbc7; max-width: 56ch; }
+  .ticket-stub {
+    border-top: 2px dashed var(--line); padding: 28px clamp(20px, 5vw, 32px);
+    display: flex; flex-direction: column; gap: 12px; justify-content: center;
+  }
+  @media (min-width: 700px) { .ticket-stub { border-top: none; border-left: 2px dashed var(--line); } }
+  .ticket-stub a {
+    display: block; text-decoration: none;
+    font-family: "Space Mono", monospace; font-size: 13px; letter-spacing: 0.02em;
+    color: var(--chalk); border: 1px solid var(--line); padding: 12px 16px;
+  }
+  .ticket-stub a:hover { border-color: var(--hazard); color: var(--hazard); }
+  .ticket-stub .label {
+    font-family: "Work Sans", sans-serif; font-size: 10px; letter-spacing: 0.1em; font-weight: 700;
+    text-transform: uppercase; color: var(--chalk-soft); margin-top: 8px;
+  }
+  .ticket-stub .label:first-child { margin-top: 0; }
 
   footer {
-    padding: 20px; text-align: center; border-top: 1px solid var(--rule);
-    font-family: "IBM Plex Mono", monospace; font-size: 10.5px; letter-spacing: 0.12em;
-    text-transform: uppercase; color: var(--ink-soft); line-height: 2;
+    padding: 22px 20px; text-align: center; border-top: 1px solid var(--line);
+    font-family: "Space Mono", monospace; font-size: 10.5px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--chalk-soft); line-height: 2;
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="masthead">
-    <img src="images/logo-white.png" alt="Q Fab Works logo">
-    <div class="word">
-      <span class="name">Q Fab Works</span>
-      <span class="beat">Metal &middot; Laser &middot; 3D Print</span>
-    </div>
+<div class="hazard-bar"></div>
+<header class="shopbar">
+  <div class="brand">
+    <div class="brand-badge chamfer-sm"><img src="images/logo-white.png" alt="Q Fab Works logo"></div>
+    <span class="brand-name">Q Fab Works</span>
   </div>
-  <nav>
+  <nav class="shopnav">
     <a href="#services">Services</a>
     <a href="#gallery">Gallery</a>
     <a href="#about">About</a>
@@ -222,38 +287,41 @@
 </header>
 
 <div class="hero">
-  <div class="hero-img">
-    <div class="hero-overlay">
-      <p class="hero-tag">Custom Fabrication &middot; Myrtle Beach, SC</p>
-      <h1>Metal, laser &amp; print — built to order</h1>
-      <p class="hero-sub">Custom metal signs and art cut on the plasma table and hand-welded, laser engraving and cutting for wood and acrylic, and 3D-printed parts and prototypes. One shop, start to finish.</p>
-    </div>
-  </div>
-  <div class="hero-strip">
-    <span><b>Custom &amp; ready-made</b></span>
-    <span>Plasma cutting &amp; welding</span>
-    <span>Laser engraving &amp; cutting</span>
-    <span>3D printing</span>
+  <div class="hero-plate chamfer">
+    <p class="job-tag">Work Order &middot; Custom Fabrication &middot; Myrtle Beach, SC</p>
+    <h1>Metal, laser &amp; print — built to order</h1>
+    <p class="hero-sub">Custom metal signs and art cut on the plasma table and hand-welded, laser engraving and cutting for wood and acrylic, and 3D-printed parts and prototypes. One shop, start to finish.</p>
+    <a class="hero-cta" href="#contact">Get a Quote</a>
   </div>
 </div>
+<div class="ticker">
+  <span><b>01</b> &nbsp;Custom &amp; ready-made</span>
+  <span><b>02</b> &nbsp;Plasma cutting &amp; welding</span>
+  <span><b>03</b> &nbsp;Laser engraving &amp; cutting</span>
+  <span><b>04</b> &nbsp;3D printing</span>
+</div>
 
-<section id="services">
-  <p class="kicker">What We Do</p>
-  <h2>Services</h2>
-  <p class="section-note">From a hand-drawn idea to a finished piece — metal, wood, acrylic, or plastic.</p>
-  <div class="services">
-    <div class="service">
-      <div class="icon">01 &mdash; Plasma &amp; Weld</div>
+<section id="services" class="process">
+  <div class="sec-head">
+    <span class="stamp">What We Do</span>
+    <h2>Services</h2>
+  </div>
+  <div class="process-strip">
+    <div class="process-step">
+      <div class="num">01</div>
+      <span class="tag">Plasma &amp; Weld</span>
       <h3>Metal Signs &amp; Art</h3>
       <p>Custom metal signs, wall art, and fabricated pieces cut on the plasma table and finished by hand-welding. Business signage, house numbers, monograms, and one-off art pieces.</p>
     </div>
-    <div class="service">
-      <div class="icon">02 &mdash; Laser</div>
+    <div class="process-step">
+      <div class="num">02</div>
+      <span class="tag">Laser</span>
       <h3>Engraving &amp; Cutting</h3>
       <p>Precision laser engraving and cutting on wood and acrylic. Signage, awards, gifts, and custom-cut parts and designs.</p>
     </div>
-    <div class="service">
-      <div class="icon">03 &mdash; Additive</div>
+    <div class="process-step">
+      <div class="num">03</div>
+      <span class="tag">Additive</span>
       <h3>3D Printing</h3>
       <p>3D-printed prototypes, parts, and finished products. Functional prints and custom designs in a range of materials and colors.</p>
     </div>
@@ -261,124 +329,146 @@
 </section>
 
 <section id="gallery">
-  <p class="kicker">Portfolio</p>
-  <h2>Gallery</h2>
-  <p class="section-note">A mix of custom commissions and ready-made pieces. Filter by category, tap a piece for details.</p>
-  <div class="filters" id="filters"></div>
-  <div class="grid" id="grid"></div>
-</section>
-
-<section id="about">
-  <p class="kicker">About</p>
-  <h2>Daniel Durgin</h2>
-  <div class="about-wrap">
-    <div class="headshot" role="img" aria-label="Daniel Durgin"></div>
-    <div class="about-text">
-      <p>I'm the owner and fabricator behind Q Fab Works, based in Myrtle Beach, South Carolina. I'm a retired U.S. Army Staff Sergeant with 18 years of service, and I hold Advanced Welding Technology certifications from Horry-Georgetown Technical College alongside a background in digital arts and graphic design.</p>
-      <p>That combination is the shop: welding and metal fabrication skill paired with a designer's eye, so a piece looks right and holds up. Whether it's a custom metal sign, a laser-cut gift, or a 3D-printed part, I handle the design and the build myself, start to finish.</p>
-      <div class="creds">
-        <p class="kicker">Background</p>
-        <ul>
-          <li>&mdash; Advanced Welding Technology Certificate, Horry-Georgetown Technical College</li>
-          <li>&mdash; A.A.S. General Technology (Welding), Horry-Georgetown Technical College</li>
-          <li>&mdash; A.A.S. Digital Arts, Horry-Georgetown Technical College</li>
-          <li>&mdash; Retired U.S. Army Staff Sergeant, 18 years of service</li>
-        </ul>
+  <div class="gallery-wrap">
+    <div class="sec-head">
+      <span class="stamp">Portfolio</span>
+      <h2>Gallery</h2>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="filmstrip" id="filmstrip"></div>
+    <div class="detail-panel" id="detail">
+      <div class="detail-img" id="detailImg"></div>
+      <div class="detail-body">
+        <h4 id="detailTitle"></h4>
+        <p class="meta" id="detailMeta"></p>
+        <p id="detailCap"></p>
+        <button class="detail-close" id="detailClose">Close &#10005;</button>
       </div>
     </div>
   </div>
 </section>
 
-<section class="contact" id="contact">
-  <div class="contact-inner">
-    <p class="kicker">Contact</p>
-    <h2>Get a Quote</h2>
-    <p>Have an idea for a custom sign, art piece, or part? Send a description or sketch and I'll get back to you with pricing and timeline.</p>
-    <div class="contact-links">
-      <a class="cta" href="mailto:daniel@dqdmedia.com?subject=Q Fab Works inquiry">daniel@dqdmedia.com</a>
-      <a class="cta" href="tel:+18438137293">843.813.7293</a>
+<section id="about">
+  <div class="dossier">
+    <div class="dossier-text">
+      <div class="sec-head">
+        <span class="stamp">About</span>
+        <h2>Daniel Durgin</h2>
+      </div>
+      <p>I'm the owner and fabricator behind Q Fab Works, based in Myrtle Beach, South Carolina. I'm a retired U.S. Army Staff Sergeant with 18 years of service, and I hold Advanced Welding Technology certifications from Horry-Georgetown Technical College alongside a background in digital arts and graphic design.</p>
+      <p>That combination is the shop: welding and metal fabrication skill paired with a designer's eye, so a piece looks right and holds up. Whether it's a custom metal sign, a laser-cut gift, or a 3D-printed part, I handle the design and the build myself, start to finish.</p>
+    </div>
+    <div class="badge">
+      <div class="badge-photo" role="img" aria-label="Daniel Durgin"></div>
+      <div class="badge-name">D. Durgin</div>
+      <div class="badge-role">Owner &amp; Fabricator</div>
+      <ul>
+        <li>&mdash; Advanced Welding Technology Certificate, HGTC</li>
+        <li>&mdash; A.A.S. General Technology (Welding), HGTC</li>
+        <li>&mdash; A.A.S. Digital Arts, HGTC</li>
+        <li>&mdash; Retired U.S. Army SSG, 18 yrs service</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<footer>&copy; 2026 Q Fab Works / Daniel Durgin &middot; Myrtle Beach, SC<br>All work &copy; the fabricator</footer>
-
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
-  <button class="lb-close" id="lbClose" aria-label="Close">&#10005;</button>
-  <div class="lb-card">
-    <div class="lb-img" id="lbImg"></div>
-    <p class="lb-cap" id="lbCap"></p>
+<div class="ticket-wrap">
+  <div class="ticket" id="contact">
+    <div class="ticket-main">
+      <span class="stamp">Contact</span>
+      <h2>Open a Ticket</h2>
+      <p>Have an idea for a custom sign, art piece, or part? Send a description or sketch and I'll get back to you with pricing and timeline.</p>
+    </div>
+    <div class="ticket-stub">
+      <span class="label">Email</span>
+      <a href="mailto:daniel@dqdmedia.com?subject=Q Fab Works inquiry">daniel@dqdmedia.com</a>
+      <span class="label">Phone</span>
+      <a href="tel:+18438137293">843.813.7293</a>
+    </div>
   </div>
 </div>
+
+<footer>&copy; 2026 Q Fab Works / Daniel Durgin &middot; Myrtle Beach, SC<br>All work &copy; the fabricator</footer>
 
 <script>
   // ----- Replace these with real photos as work is completed -----
   // Swap the "grad" gradients for image URLs later: set img:"photos/<category>/filename.jpg"
   const SHOTS = [
-    { title: "Coastal Sunset Sign", cat: "Metal Signs & Art", meta: "Plasma cut & welded", cap: "Layered steel silhouette sign, plasma-cut and hand-welded, powder-coated finish.", grad: ["#2a2420", "#f2a11a"] },
+    { title: "Coastal Sunset Sign", cat: "Metal Signs & Art", meta: "Plasma cut & welded", cap: "Layered steel silhouette sign, plasma-cut and hand-welded, powder-coated finish.", grad: ["#2a2420", "#f7d417"] },
     { title: "House Number Plaque", cat: "Metal Signs & Art", meta: "Plasma cut", cap: "Custom address plaque, raw steel with a clear coat finish.", grad: ["#1c1f22", "#7a7d80"] },
-    { title: "Family Name Monogram", cat: "Metal Signs & Art", meta: "Plasma cut & welded", cap: "Interlocking monogram wall art, cut and welded from mild steel.", grad: ["#241a12", "#ff5a2e"] },
-    { title: "Business Storefront Sign", cat: "Metal Signs & Art", meta: "Plasma cut & welded", cap: "Two-layer business sign with standoff mounting for a shadow effect.", grad: ["#1a1c1e", "#f2a11a"] },
+    { title: "Family Name Monogram", cat: "Metal Signs & Art", meta: "Plasma cut & welded", cap: "Interlocking monogram wall art, cut and welded from mild steel.", grad: ["#241a12", "#e8382c"] },
+    { title: "Business Storefront Sign", cat: "Metal Signs & Art", meta: "Plasma cut & welded", cap: "Two-layer business sign with standoff mounting for a shadow effect.", grad: ["#1a1c1e", "#f7d417"] },
     { title: "Anniversary Gift Plaque", cat: "Laser Engraving & Cutting", meta: "Laser engraved — wood", cap: "Engraved hardwood plaque with custom text and artwork.", grad: ["#2e2418", "#c98b5a"] },
     { title: "Acrylic Display Stand", cat: "Laser Engraving & Cutting", meta: "Laser cut — acrylic", cap: "Precision-cut acrylic stand, assembled without visible fasteners.", grad: ["#101820", "#3d8ab0"] },
     { title: "Custom Cutting Board", cat: "Laser Engraving & Cutting", meta: "Laser engraved — wood", cap: "Engraved hardwood cutting board, custom monogram design.", grad: ["#241c14", "#b08050"] },
     { title: "Awards & Recognition Set", cat: "Laser Engraving & Cutting", meta: "Laser engraved — acrylic", cap: "Matched set of engraved acrylic award plaques.", grad: ["#141a20", "#5a9ab0"] },
-    { title: "Functional Prototype Housing", cat: "3D Printing", meta: "3D printed — PLA/PETG", cap: "Custom-designed enclosure, printed and test-fit for function.", grad: ["#181a1c", "#e0522b"] },
+    { title: "Functional Prototype Housing", cat: "3D Printing", meta: "3D printed — PLA/PETG", cap: "Custom-designed enclosure, printed and test-fit for function.", grad: ["#181a1c", "#e8382c"] },
     { title: "Replacement Part", cat: "3D Printing", meta: "3D printed", cap: "Reverse-engineered replacement part, printed to spec.", grad: ["#1c1e20", "#8a8d90"] },
-    { title: "Custom Figurine", cat: "3D Printing", meta: "3D printed", cap: "Detailed custom figurine, printed and hand-finished.", grad: ["#201820", "#f2a11a"] },
+    { title: "Custom Figurine", cat: "3D Printing", meta: "3D printed", cap: "Detailed custom figurine, printed and hand-finished.", grad: ["#201820", "#f7d417"] },
   ];
 
   const CATS = ["All", "Metal Signs & Art", "Laser Engraving & Cutting", "3D Printing"];
 
-  const filtersEl = document.getElementById("filters");
-  const gridEl = document.getElementById("grid");
-  const lb = document.getElementById("lightbox");
-  const lbImg = document.getElementById("lbImg");
-  const lbCap = document.getElementById("lbCap");
+  const tabsEl = document.getElementById("tabs");
+  const stripEl = document.getElementById("filmstrip");
+  const detail = document.getElementById("detail");
+  const detailImg = document.getElementById("detailImg");
+  const detailTitle = document.getElementById("detailTitle");
+  const detailMeta = document.getElementById("detailMeta");
+  const detailCap = document.getElementById("detailCap");
   let active = "All";
+  let selectedTitle = null;
 
   function bg(s) { return s.img ? `url('${s.img}') center/cover no-repeat` : `linear-gradient(140deg, ${s.grad[0]}, ${s.grad[1]})`; }
   function bgFull(s) { return s.img ? `url('${s.img}') center/contain no-repeat` : `linear-gradient(140deg, ${s.grad[0]}, ${s.grad[1]})`; }
 
-  function renderFilters() {
-    filtersEl.innerHTML = "";
+  function renderTabs() {
+    tabsEl.innerHTML = "";
     CATS.forEach(cat => {
       const btn = document.createElement("button");
       btn.textContent = cat;
       if (cat === active) btn.classList.add("active");
-      btn.onclick = () => { active = cat; renderFilters(); renderGrid(); };
-      filtersEl.appendChild(btn);
+      btn.onclick = () => { active = cat; renderTabs(); renderStrip(); };
+      tabsEl.appendChild(btn);
     });
   }
 
-  function renderGrid() {
-    gridEl.innerHTML = "";
+  function openDetail(s) {
+    selectedTitle = s.title;
+    detailImg.style.background = bgFull(s);
+    detailTitle.textContent = s.title;
+    detailMeta.textContent = s.meta;
+    detailCap.textContent = s.cap;
+    detail.classList.add("open");
+    renderStrip();
+  }
+
+  function renderStrip() {
+    stripEl.innerHTML = "";
     const shots = active === "All" ? SHOTS : SHOTS.filter(s => s.cat === active);
     shots.forEach(s => {
       const fig = document.createElement("button");
-      fig.className = "shot";
+      fig.className = "tile" + (s.title === selectedTitle ? " selected" : "");
       fig.setAttribute("aria-label", "View " + s.title);
       fig.innerHTML = `
-        <div class="shot-img" style="background:${bg(s)}"></div>
+        <div class="tile-img" style="background:${bg(s)}"></div>
         <figcaption>
           <div class="title">${s.title}</div>
           <div class="meta">${s.meta}</div>
         </figcaption>`;
-      fig.onclick = () => {
-        lbImg.style.background = bgFull(s);
-        lbCap.textContent = s.cap;
-        lb.classList.add("open");
-      };
-      gridEl.appendChild(fig);
+      fig.onclick = () => openDetail(s);
+      stripEl.appendChild(fig);
     });
   }
 
-  document.getElementById("lbClose").onclick = () => lb.classList.remove("open");
-  lb.onclick = (e) => { if (e.target === lb) lb.classList.remove("open"); };
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") lb.classList.remove("open"); });
+  document.getElementById("detailClose").onclick = () => {
+    detail.classList.remove("open");
+    selectedTitle = null;
+    renderStrip();
+  };
 
-  renderFilters();
-  renderGrid();
+  renderTabs();
+  renderStrip();
 </script>
 </body>
 </html>
